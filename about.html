@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOU FOUND IT</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      font-family: 'Space Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Confetti */
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      animation: fall linear infinite;
+      border-radius: 2px;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    .center {
+      text-align: center;
+      z-index: 10;
+      padding: 20px;
+    }
+
+    .trophy {
+      font-size: 6rem;
+      animation: bounce 1s ease infinite alternate;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-20px); }
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, #ff4d4d, #ff9900, #ffff00, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 10px #ff4d4d88); }
+      to { filter: drop-shadow(0 0 30px #ffff0088); }
+    }
+
+    .subtitle {
+      color: #555;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-top: 12px;
+    }
+
+    .stats {
+      margin-top: 40px;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 6px;
+      padding: 24px 40px;
+      display: inline-block;
+    }
+
+    .stats p {
+      font-size: 0.75rem;
+      color: #444;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .stats .big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: #ff9900;
+      letter-spacing: 0.1em;
+      line-height: 1;
+    }
+
+    .message {
+      margin-top: 30px;
+      color: #333;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .btn-back {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 12px 32px;
+      border: 1px solid #333;
+      background: transparent;
+      color: #555;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      border-color: #ff4d4d;
+      color: #ff4d4d;
+    }
+
+    .stamp {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 8rem;
+      color: #ffffff05;
+      letter-spacing: 0.1em;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .stamp-1 { top: 5%; left: -3%; transform: rotate(-15deg); }
+    .stamp-2 { bottom: 5%; right: -3%; transform: rotate(10deg); }
+  </style>
+</head>
+<body>
+
+  <div class="stamp stamp-1">WINNER</div>
+  <div class="stamp stamp-2">WINNER</div>
+
+  <div class="center">
+    <span class="trophy">🏆</span>
+    <h1>YOU FOUND IT</h1>
+    <p class="subtitle">Out of 1000 buttons, you clicked the one that mattered</p>
+
+    <div class="stats">
+      <p>Congratulations, you survived</p>
+      <div class="big">1000</div>
+      <p>buttons of pure chaos</p>
+    </div>
+
+    <p class="message">Most people find it around button 500. You are not most people.</p>
+
+    <a href="index.html" class="btn-back">← Try Again (why would you)</a>
+  </div>
+
+  <script>
+    // Generate confetti
+    const colors = ['#ff4d4d', '#ff9900', '#ffff00', '#00ff88', '#00cfff', '#ff69b4', '#ffffff'];
+    const container = document.body;
+
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.width = (Math.random() * 8 + 6) + 'px';
+      piece.style.height = (Math.random() * 8 + 6) + 'px';
+      piece.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      piece.style.animationDelay = (Math.random() * 4) + 's';
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      container.appendChild(piece);
+    }
+  </script>
+
+</body>
+</html>
